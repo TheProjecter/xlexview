@@ -1,22 +1,18 @@
-CFLAGS=-O3 -Wall -I /usr/local/include -I /usr/X11R6/include
-LFLAGS=-L /usr/X11R6/lib -lX11
+CC=gcc
+CFLAGS=-Wall -g -O2
+CFLAGS+=-I/usr/local/include -DX11R4UP
+LFLAGS=-L/usr/local/lib -lX11
+INSTALL=install
 
+OBJS=main.o font.o list.o parse.o
 
-xlv: main.o font.o list.o parse.o
-	$(CC) -o xlv main.o font.o list.o parse.o $(LFLAGS)
+all: xlexview
 
-main.o: main.c
-	$(CC) -c main.c $(CFLAGS)
+xlexview: $(OBJS)
+	$(CC) $(LFLAGS) -o $@ $(OBJS)
 
-font.o: font.c
-	$(CC) -c font.c $(CFLAGS)
-
-list.o: list.c
-	$(CC) -c list.c $(CFLAGS)
-
-parse.o: parse.c
-	$(CC) -c parse.c $(CFLAGS)
+%.o : %.c Makefile
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -f *.o *~ xlv
-
+	rm -f *.o xlexview

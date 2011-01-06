@@ -1,0 +1,5 @@
+0. Add support "-display" and "-geom"
+1. Convert RAW font to pixmap.
+2. Start support PCX format.
+3. Generate PS file for printing.
+

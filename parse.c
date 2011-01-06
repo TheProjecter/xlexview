@@ -4,7 +4,8 @@
 
 #include "parse.h"
 
-int parse(int x, int y, char *str, int len)
+
+int parse(int x, int y, unsigned char *str, int len)
 {
 	int underline=0;
 	int command=0;
@@ -15,7 +16,7 @@ int parse(int x, int y, char *str, int len)
 
 	for(pos=0; pos < len; pos++) {
 		if ( command ) {
-			ch=(unsigned char)*(str+pos);
+			ch=*(str+pos);
 			switch (ch)
 			{
 				case 0x2E:

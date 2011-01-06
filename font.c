@@ -1,6 +1,8 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <assert.h>
 
 #include <X11/Xlib.h>
 
@@ -29,19 +31,21 @@ int font_create(void)
 
 int font_load(unsigned char id, unsigned char width, unsigned char height, char *fname)
 {
-	int fd;
+    int fd;
 
-	fd=open(fname, O_RDONLY);
-	if (fd > 0) {
-		font[id].width=width;
-		font[id].height=height;
-		font[id].data=malloc(0x100*width*height*8);
-		read(fd, (void *)font[id].data, (size_t)0x100*width*height*8);
-		close(fd);
-		
-		return 1;
-	}
-	return 0;
+    fd=open(fname, O_RDONLY);
+    if (fd == -1)
+        return -1;
+
+    font[id].width=width;
+    font[id].height=height;
+    font[id].data = (unsigned char *)malloc(0x100*width*height*8);
+    assert(font[id].data);
+    read(fd, (void *)font[id].data, (size_t)0x100*width*height*8);
+
+    close(fd);
+
+    return 0;
 }
 
 inline int font_char(unsigned char id, int x, int y, unsigned char ch)

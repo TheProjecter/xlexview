@@ -1,9 +1,11 @@
-Lexicon Document Viewer 0.2
+Lexicon Document Viewer 0.3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Hi.
+Lexicon Viewer for X11 Windows system is Lexicon document reader,
+It's support a small lexicon file (bcz file load to memory),
+support base standart CP866 cyrillic font and math extension.
 
-Lexicon Viewer for X11 Windows System is Open Source programm.
+
 You can start xlexview on X11 pure system.
 
 Thanx.

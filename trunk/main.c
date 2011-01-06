@@ -39,10 +39,10 @@ int cur=0;
 
 int main(int argc, char *argv[])
 {
-	unsigned char quit=0;
-	char str[256];
-	int x,y;
-	int n;
+    unsigned char quit=0;
+    char str[256];
+    int x,y;
+    int n;
 	
 	// Check parameter.
 	if (argc != 2) {
@@ -55,21 +55,16 @@ int main(int argc, char *argv[])
 
 	// Load font.
 	for (n=0; n < 10; n++) {
-	    int rc;
-	    sprintf(str, FONT_PATH"/font%d.fnt", n);
-	    rc=font_load(0x30 + n, 8, 19, str);
-	    if (!rc) {
-		fprintf(stderr, "error load file %s\n", str);
-	    }
+	    sprintf(str, FONT_PATH"font%d.fnt", n);
+	    font_load(0x30 + n, 8, 19, str);
 	}
 	
 	// Load file.
 	list_create(&list_first);
 	list_load(&list_first, argv[1]);
 
-	// 
-	
-	display = XOpenDisplay(NULL);
+    /* Create display */ 
+    display = XOpenDisplay(getenv("DISPLAY"));
 	if (display == NULL) {
 		fprintf(stderr, "error: can't open display.\n");
 		exit(1);
@@ -118,7 +113,7 @@ int main(int argc, char *argv[])
 			cur=cx=cy=0;
 			while ((list_current != NULL) && ( (cur-line)*19 < window_attr.height)) {
 				if (cur >= line) {
-					parse(cx, cy, list_current->value, strlen(list_current->value));
+					parse(0 + cx, 0 + cy, list_current->value, strlen(list_current->value));
 					/*cx=0;*/ cy += 19;
 				}
 

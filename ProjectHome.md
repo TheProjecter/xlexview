@@ -1,0 +1,1 @@
+This is a basic viewer for old MS-DOS version of Lexicon  editor. Scine in version 3.0 of base lexicon editor using a DOM container and this viewer can't open this file.
